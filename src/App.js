@@ -35,10 +35,23 @@ let flashcard = [
 ];
 
 function App() {
+  const [selectedId, setSelectedId] = useState(null);
+
+  function handle(id) {
+    setSelectedId(id !== selectedId ? id : null);
+  }
 
   return (
     <div className="App">
-      
+      {flashcard.map((question) => (
+        <div
+          onClick={() => handle(question.id)}
+          key={question.id}
+          className={question.id === selectedId ? "selected" : ""}
+        >
+          {question.id === selectedId ? question.answer : question.question}
+        </div>
+      ))}
     </div>
   );
 }
